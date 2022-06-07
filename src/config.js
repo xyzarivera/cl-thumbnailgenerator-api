@@ -1,5 +1,4 @@
 const configJson = require("../config.json");
-const env = process.env.NODE_ENV ?? "development";
-const config = configJson[env];
+const config = configJson[process.env.NODE_ENV ?? "development"];
 
 module.exports = config;
