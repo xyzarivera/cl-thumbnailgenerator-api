@@ -1,7 +1,10 @@
 const { setupApp } = require("./app");
+const config = require("../config");
+
+console.log(config);
 
 const app = setupApp();
-const PORT = 8000;
+const PORT = config.port;
 
 app.listen(PORT, () => {
   console.log("API server is listening at port", PORT);
