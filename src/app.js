@@ -1,13 +1,9 @@
 const express = require("express");
 
-function setupApp() {
-  const app = express();
+const app = express();
 
-  app.get("/hello", (req, res) => {
-    res.send("hi");
-  });
+app.get("/hello", (req, res) => {
+  res.send("hi");
+});
 
-  return app;
-}
-
-module.exports = { setupApp };
+module.exports = app;
