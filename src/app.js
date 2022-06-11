@@ -3,7 +3,6 @@ const fileUpload = require("express-fileupload");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const morgan = require("morgan");
-const crypto = require("crypto");
 
 const app = express();
 
@@ -26,22 +25,20 @@ app.post("/thumbnails", async (req, res) => {
       });
     } else {
       const { image } = req.files;
-      const imageID = crypto.randomUUID();
-      const imageType = image.mimetype.split("/")[1];
-      image.mv(`./uploads/${imageID}.${imageType}`);
-      console.log(image);
+      const { name } = image;
+      image.mv(`./uploads/${name}`);
 
       res.send({
         status: true,
         message: "File is uploaded",
         data: {
-          id: imageID,
+          id: name,
           mimetype: image.mimetype,
-          size: image.size,
         },
       });
     }
   } catch (err) {
+    console.error(err);
     res.status(500).send(err);
   }
 });
