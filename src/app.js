@@ -3,6 +3,7 @@ const fileUpload = require("express-fileupload");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const morgan = require("morgan");
+const config = require("./config");
 
 const app = express();
 
@@ -26,7 +27,7 @@ app.post("/thumbnails", async (req, res) => {
     } else {
       const { image } = req.files;
       const { name } = image;
-      image.mv(`./uploads/${name}`);
+      image.mv(`${config.storageDir}/${name}`);
 
       res.send({
         status: true,

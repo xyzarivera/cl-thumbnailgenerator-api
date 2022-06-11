@@ -1,5 +1,14 @@
 {
+    "production": {
+        "port": 8000,
+        "storageDir": "./storage"
+    },
     "development": {
-        "port": 8000
+        "port": 8000,
+        "storageDir": "./storage"
+    },
+    "test": {
+        "port": 8000,
+        "storageDir": "./test/storage"
     }
 }
