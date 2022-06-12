@@ -1,14 +1,17 @@
 {
     "production": {
         "port": 8000,
-        "storageDir": "./storage"
+        "storageDir": "./storage",
+        "thumbnailsDir": "./storage"
     },
     "development": {
         "port": 8000,
-        "storageDir": "./storage"
+        "storageDir": "./storage",
+        "thumbnailsDir": "./storage"
     },
     "test": {
         "port": 8000,
-        "storageDir": "./test/storage"
+        "storageDir": "./test/storage",
+        "thumbnailsDir": "./storage"
     }
 }
