@@ -2,7 +2,6 @@ const request = require("supertest");
 const app = require("./app");
 const fs = require("fs");
 const config = require("./config");
-const thumbnailGeneratorQueue = require("../thumbnailGenerator/index");
 
 /**TODO
  * 1. mock thumbnailGeneratorQueue
