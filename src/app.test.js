@@ -3,7 +3,16 @@ const app = require("./app");
 const fs = require("fs");
 const config = require("./config");
 
+/**TODO
+ * 1. mock thumbnailGeneratorQueue
+ */
+
 describe("/thumbnail", () => {
+  // eslint-disable-next-line no-undef
+  afterAll(() => {
+    fs.unlinkSync(`${config.storageDir}/testImage.png`);
+    fs.unlinkSync(`${config.thumbnailsDir}/testImage.png`);
+  });
   it("POST /thumbnails - should be able to upload a file", (done) => {
     const testImagePath = `${config.assetsDir}/testImage.png`;
     request(app)
@@ -21,7 +30,6 @@ describe("/thumbnail", () => {
       .expect(() => {
         // eslint-disable-next-line no-undef
         expect(fs.existsSync(`${config.storageDir}/testImage.png`)).toBe(true);
-        fs.unlinkSync(`${config.storageDir}/testImage.png`);
       })
       .end((err, res) => {
         if (err) return done(err);
@@ -34,9 +42,6 @@ describe("/thumbnail", () => {
       .get("/thumbnails/testImage.png")
       .expect(200)
       .expect("Content-Type", "image/png")
-      .expect(() => {
-        fs.unlinkSync(`${config.thumbnailsDir}/testImage.png`);
-      })
       .end((err, res) => {
         if (err) return done(err);
         return done();
