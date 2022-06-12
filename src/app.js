@@ -55,8 +55,12 @@ app.post("/thumbnails", async (req, res) => {
 app.get("/thumbnails/:id", async (req, res) => {
   const { id } = req.params;
 
-  const response = await get(id);
-  res.sendFile(response);
+  try {
+    const response = await get(id);
+    res.sendFile(response);
+  } catch (err) {
+    res.status(404).send(err);
+  }
 });
 
 module.exports = app;
