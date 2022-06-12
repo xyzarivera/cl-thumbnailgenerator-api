@@ -2,6 +2,7 @@ const request = require("supertest");
 const app = require("./app");
 const fs = require("fs");
 const config = require("./config");
+const thumbnailGeneratorQueue = require("../thumbnailGenerator/index");
 
 /**TODO
  * 1. mock thumbnailGeneratorQueue
@@ -11,8 +12,8 @@ describe("/thumbnail", () => {
   // eslint-disable-next-line no-undef
   afterAll(() => {
     fs.unlinkSync(`${config.storageDir}/testImage.png`);
-    fs.unlinkSync(`${config.thumbnailsDir}/testImage.png`);
   });
+
   it("POST /thumbnails - should be able to upload a file", (done) => {
     const testImagePath = `${config.assetsDir}/testImage.png`;
     request(app)
@@ -39,7 +40,7 @@ describe("/thumbnail", () => {
 
   it("GET /thumbnails/:id - should be able to return the thumbnail given an id", (done) => {
     request(app)
-      .get("/thumbnails/testImage.png")
+      .get("/thumbnails/testImage2.png")
       .expect(200)
       .expect("Content-Type", "image/png")
       .end((err, res) => {
