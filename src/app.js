@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const morgan = require("morgan");
 const config = require("./config");
+const { get } = require("../api/thumbnails");
 
 const app = express();
 
@@ -42,6 +43,13 @@ app.post("/thumbnails", async (req, res) => {
     console.error(err);
     res.status(500).send(err);
   }
+});
+
+app.get("/thumbnails/:id", async (req, res) => {
+  const { id } = req.params;
+
+  const response = await get(id);
+  res.sendFile(response);
 });
 
 module.exports = app;
