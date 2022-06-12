@@ -7,7 +7,7 @@
     "development": {
         "port": 8000,
         "storageDir": "./storage",
-        "thumbnailsDir": "./thumbnils"
+        "thumbnailsDir": "./thumbnails"
     },
     "test": {
         "port": 8000,
