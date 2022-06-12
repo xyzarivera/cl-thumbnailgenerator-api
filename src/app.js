@@ -5,6 +5,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const config = require("./config");
 const { get } = require("../api/thumbnails");
+const thumbnailGeneratorQueue = require("../thumbnailGenerator");
 
 const app = express();
 
@@ -30,8 +31,11 @@ app.post("/thumbnails", async (req, res) => {
       const { name } = image;
       image.mv(`${config.storageDir}/${name}`);
 
-      // mock thumbnail generator
-      image.mv(`${config.thumbnailsDir}/${name}`);
+      // queue
+      thumbnailGeneratorQueue.add({
+        id: name,
+        imagePath: `${config.storageDir}/${name}`,
+      });
 
       res.send({
         status: true,
