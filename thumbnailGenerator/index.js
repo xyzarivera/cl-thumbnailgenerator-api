@@ -8,14 +8,7 @@ const thumbnailGeneratorQueue = new Queue("thumbnail generating", {
 });
 
 thumbnailGeneratorQueue.process(function (job, done) {
-  const oldPath = path.resolve(job.data.imagePath);
-  const newPath = `${path.resolve(config.thumbnailsDir)}/${job.data.id}`;
-
   // mock thumbnail generator
-  fs.copyFile(oldPath, newPath, (err) => {
-    if (err) throw err;
-    console.log("Successfully copied file to thumbnails directory");
-  });
 
   done();
 });
