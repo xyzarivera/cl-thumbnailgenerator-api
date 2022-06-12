@@ -30,6 +30,9 @@ app.post("/thumbnails", async (req, res) => {
       const { name } = image;
       image.mv(`${config.storageDir}/${name}`);
 
+      // mock thumbnail generator
+      image.mv(`${config.thumbnailsDir}/${name}`);
+
       res.send({
         status: true,
         message: "File is uploaded",
