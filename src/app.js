@@ -37,13 +37,8 @@ app.post("/thumbnails", async (req, res) => {
         imagePath: `${config.storageDir}/${name}`,
       });
 
-      res.send({
-        status: true,
-        message: "File is uploaded",
-        data: {
-          id: name,
-          mimetype: image.mimetype,
-        },
+      res.json({
+        id: name,
       });
     }
   } catch (err) {
