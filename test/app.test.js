@@ -1,7 +1,7 @@
 const request = require("supertest");
-const app = require("./app");
+const app = require("../src/app");
 const fs = require("fs");
-const config = require("./config");
+const config = require("../src/config");
 
 /**TODO
  * 1. mock thumbnailGeneratorQueue
@@ -10,7 +10,7 @@ const config = require("./config");
 describe("/thumbnail", () => {
   // eslint-disable-next-line no-undef
   afterAll(() => {
-    fs.unlinkSync(`${config.storageDir}/testImage.png`);
+    fs.unlink(`${config.storageDir}/testImage.png`, function (err) {});
   });
 
   it("POST /thumbnails - should be able to upload a file", (done) => {
@@ -20,12 +20,7 @@ describe("/thumbnail", () => {
       .attach("image", testImagePath)
       .expect(200)
       .expect({
-        status: true,
-        message: "File is uploaded",
-        data: {
-          id: "testImage.png",
-          mimetype: "image/png",
-        },
+        id: "testImage.png",
       })
       .expect(() => {
         // eslint-disable-next-line no-undef
