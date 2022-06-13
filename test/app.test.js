@@ -1,9 +1,18 @@
 const request = require("supertest");
-const app = require("./app");
+const app = require("../src/app");
 const fs = require("fs");
-const config = require("./config");
+const config = require("../src/config");
+
+/**TODO
+ * 1. mock thumbnailGeneratorQueue
+ */
 
 describe("/thumbnail", () => {
+  // eslint-disable-next-line no-undef
+  afterAll(() => {
+    fs.unlink(`${config.storageDir}/testImage.png`, function (err) {});
+  });
+
   it("POST /thumbnails - should be able to upload a file", (done) => {
     const testImagePath = `${config.assetsDir}/testImage.png`;
     request(app)
@@ -11,17 +20,11 @@ describe("/thumbnail", () => {
       .attach("image", testImagePath)
       .expect(200)
       .expect({
-        status: true,
-        message: "File is uploaded",
-        data: {
-          id: "testImage.png",
-          mimetype: "image/png",
-        },
+        id: "testImage.png",
       })
       .expect(() => {
         // eslint-disable-next-line no-undef
         expect(fs.existsSync(`${config.storageDir}/testImage.png`)).toBe(true);
-        fs.unlinkSync(`${config.storageDir}/testImage.png`);
       })
       .end((err, res) => {
         if (err) return done(err);
@@ -31,12 +34,9 @@ describe("/thumbnail", () => {
 
   it("GET /thumbnails/:id - should be able to return the thumbnail given an id", (done) => {
     request(app)
-      .get("/thumbnails/testImage.png")
+      .get("/thumbnails/testImage2.png")
       .expect(200)
       .expect("Content-Type", "image/png")
-      .expect(() => {
-        fs.unlinkSync(`${config.thumbnailsDir}/testImage.png`);
-      })
       .end((err, res) => {
         if (err) return done(err);
         return done();

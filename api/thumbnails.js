@@ -12,6 +12,7 @@ async function get(imageID) {
       return path.resolve(relativePath);
     }
   }
+  throw "No image found";
 }
 
 module.exports = { get };

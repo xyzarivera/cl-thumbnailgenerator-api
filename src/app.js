@@ -5,6 +5,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const config = require("./config");
 const { get } = require("../api/thumbnails");
+const thumbnailGeneratorQueue = require("../thumbnailGenerator");
 
 const app = express();
 
@@ -30,16 +31,14 @@ app.post("/thumbnails", async (req, res) => {
       const { name } = image;
       image.mv(`${config.storageDir}/${name}`);
 
-      // mock thumbnail generator
-      image.mv(`${config.thumbnailsDir}/${name}`);
+      // queue
+      thumbnailGeneratorQueue.add({
+        id: name,
+        imagePath: `${config.storageDir}/${name}`,
+      });
 
-      res.send({
-        status: true,
-        message: "File is uploaded",
-        data: {
-          id: name,
-          mimetype: image.mimetype,
-        },
+      res.json({
+        id: name,
       });
     }
   } catch (err) {
@@ -51,8 +50,12 @@ app.post("/thumbnails", async (req, res) => {
 app.get("/thumbnails/:id", async (req, res) => {
   const { id } = req.params;
 
-  const response = await get(id);
-  res.sendFile(response);
+  try {
+    const response = await get(id);
+    res.sendFile(response);
+  } catch (err) {
+    res.status(404).send(err);
+  }
 });
 
 module.exports = app;
