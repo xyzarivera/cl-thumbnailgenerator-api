@@ -4,7 +4,7 @@
   "description": "long running REST API service that resizes images to 100px x 100px thumbnails",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test jest",
+    "test": "NODE_ENV=test jest --coverage",
     "start": "NODE_ENV=development npx nodemon ./src/index.js",
     "serve": "node index.js"
   },
