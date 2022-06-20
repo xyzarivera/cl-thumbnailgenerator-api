@@ -4,13 +4,9 @@ const config = require("../src/config");
 async function _thumbnailGenerator(imageData) {
   const { id, imagePath } = imageData;
 
-  sharp(imagePath)
+  await sharp(imagePath)
     .resize(100, 100)
-    .toFile(`${config.thumbnailsDir}/${id}`, function (err) {
-      if (err) {
-        throw err;
-      }
-    });
+    .toFile(`${config.thumbnailsDir}/${id}`);
 }
 
 module.exports = _thumbnailGenerator;
