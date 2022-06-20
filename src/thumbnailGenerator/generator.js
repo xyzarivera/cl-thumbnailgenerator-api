@@ -1,5 +1,5 @@
 const sharp = require("sharp");
-const config = require("../src/config");
+const config = require("../config");
 
 async function _thumbnailGenerator(imageData) {
   const { id, imagePath } = imageData;

@@ -4,8 +4,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const morgan = require("morgan");
 const config = require("./config");
-const { get } = require("../api/thumbnails");
-const thumbnailGeneratorQueue = require("../thumbnailGenerator");
+const { get } = require("./api/thumbnails");
+const thumbnailGeneratorQueue = require("./thumbnailGenerator");
 
 const app = express();
 
