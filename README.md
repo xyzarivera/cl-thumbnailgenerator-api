@@ -34,6 +34,8 @@ curl --X POST 'localhost:3000/thumbnails' --form "image=@assets/testImage.png;ty
 {"id":"testImage.png"}
 ```
 
+![POST postman](POST.png)
+
 ### GET /thumbnail/:id
 
 -   GET endpoint to see generated thumbnail given id
@@ -45,6 +47,8 @@ curl --X GET 'localhost:3000/thumbnails/testImage.png' -o test.png
 # return
 <image>
 ```
+
+![GET postman](GET.png)
 
 ## Running the Tests
 
@@ -67,6 +71,6 @@ This is a long-running application, meaning requests should be catered and proce
 ## Improvements
 
 -   Uploaded photos and generated thumbnails do not persist in the Docker container when it is removed. It would be recommended to have them to be saved in a separate persistent storage.
--   Images (both in storage and thumbnail directories) can be overriden if an image of the same file name and type is uploaded. I would generate unique IDs per image and have a small database list down image sources and ther unique ID. 
+-   Images (both in storage and thumbnail directories) can be overriden if an image of the same file name and type is uploaded. I would generate unique IDs per image and have a small database list down image sources and ther unique ID.
 -   Improve on writing unit test as I have not mocked properly the redis queue and also increase code coverage.
-- Thumbnail generation can still be improved in quality and the area chosed to be resized/cropped into a 100x100 px image.
+-   Thumbnail generation can still be improved in quality and the area chosed to be resized/cropped into a 100x100 px image.
