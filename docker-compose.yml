@@ -1,0 +1,14 @@
+version: "3"
+services:
+  thumbnail-generator-api:
+    build: .
+    ports: 
+      - "3000:8000"
+    depends_on:
+      - redis-queue 
+  redis-queue:
+    image: redis
+    volumes:
+      - redis-volume:/data
+volumes:
+  redis-volume:
