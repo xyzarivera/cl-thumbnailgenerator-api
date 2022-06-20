@@ -1,6 +1,7 @@
 const fs = require("fs");
 const _thumbnailGenerator = require("../thumbnailGenerator/generator");
 const config = require("../src/config");
+const sharp = require("sharp");
 
 describe("thumbnailGenerator", () => {
   // eslint-disable-next-line no-undef
@@ -17,8 +18,19 @@ describe("thumbnailGenerator", () => {
     } catch (error) {
       console.log(error);
     }
+
+    // expect if image exists
     // eslint-disable-next-line no-undef
-    expect(fs.existsSync(`${config.thumbnailsDir}/testImage.png`)).toBe(true);
+    expect(fs.existsSync(`${config.thumbnailsDir}/testImage2.png`)).toBe(true);
+
+    // expect to have image dimensions of 100x100
+    const image = await sharp(`${config.thumbnailsDir}/testImage.png`);
+    const metadata = await image.metadata();
+
+    // eslint-disable-next-line no-undef
+    expect(metadata.width).toEqual(100);
+    // eslint-disable-next-line no-undef
+    expect(metadata.height).toEqual(100);
   });
   it("should throw an error", async () => {
     const fileName = "testImage.png";
