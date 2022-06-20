@@ -6,7 +6,7 @@
   "scripts": {
     "test": "NODE_ENV=test jest --coverage",
     "start": "NODE_ENV=development npx nodemon ./src/index.js",
-    "serve": "node index.js"
+    "serve": "NODE_ENV=production node ./src/index.js"
   },
   "repository": {
     "type": "git",
