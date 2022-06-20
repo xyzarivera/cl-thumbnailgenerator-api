@@ -1,5 +1,5 @@
 const fs = require("fs");
-const _thumbnailGenerator = require("../thumbnailGenerator/generator");
+const _thumbnailGenerator = require("../src/thumbnailGenerator/generator");
 const config = require("../src/config");
 const sharp = require("sharp");
 

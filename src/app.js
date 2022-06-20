@@ -4,8 +4,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const morgan = require("morgan");
 const config = require("./config");
-const { get } = require("../api/thumbnails");
-const thumbnailGeneratorQueue = require("../thumbnailGenerator");
+const { get } = require("./api/thumbnails");
+const thumbnailGeneratorQueue = require("./thumbnailGenerator");
 
 const app = express();
 
@@ -45,6 +45,10 @@ app.post("/thumbnails", async (req, res) => {
     console.error(err);
     res.status(500).send(err);
   }
+});
+
+app.get("/hello", async (req, res) => {
+  res.json("henlo");
 });
 
 app.get("/thumbnails/:id", async (req, res) => {
