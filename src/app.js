@@ -47,10 +47,6 @@ app.post("/thumbnails", async (req, res) => {
   }
 });
 
-app.get("/hello", async (req, res) => {
-  res.json("henlo");
-});
-
 app.get("/thumbnails/:id", async (req, res) => {
   const { id } = req.params;
 
