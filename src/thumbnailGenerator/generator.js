@@ -1,7 +1,7 @@
 const sharp = require("sharp");
 const config = require("../config");
 
-async function _thumbnailGenerator(imageData) {
+async function thumbnailGenerator(imageData) {
   const { id, imagePath } = imageData;
 
   await sharp(imagePath)
@@ -9,4 +9,4 @@ async function _thumbnailGenerator(imageData) {
     .toFile(`${config.thumbnailsDir}/${id}`);
 }
 
-module.exports = _thumbnailGenerator;
+module.exports = thumbnailGenerator;
