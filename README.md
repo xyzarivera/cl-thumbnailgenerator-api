@@ -4,8 +4,8 @@
 
 Run `docker-compose up` to run the service. This will run the following containers
 
--   thumbnail-generator-api
--   redis-queue
+- thumbnail-generator-api
+- redis-queue
 
 ### Running in developer mode
 
@@ -19,10 +19,10 @@ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build
 
 ### POST /thumbnail
 
--   POST endpoint where an image can be uploaded for thumbnail generation
--   returns id of the generated thumbnail
-    -   currently returns the file name of the image
--   request is in `form-data` type
+- POST endpoint where an image can be uploaded for thumbnail generation
+- returns id of the generated thumbnail
+  - currently returns the file name of the image
+- request is in `form-data` type
 
 ```
 # request
@@ -32,11 +32,11 @@ curl --X POST 'localhost:3000/thumbnails' --form "image=@assets/testImage.png;ty
 {"id":"testImage.png"}
 ```
 
-![POST postman](POST.png)
+![POST postman](./docs/POST.png)
 
 ### GET /thumbnail/:id
 
--   GET endpoint to see generated thumbnail given an id
+- GET endpoint to see generated thumbnail given an id
 
 ```
 # request
@@ -46,7 +46,7 @@ curl --X GET 'localhost:3000/thumbnails/testImage.png' -o test.png
 <image>
 ```
 
-![GET postman](GET.png)
+![GET postman](./docs/GET.png)
 
 ## Running the Tests
 
@@ -60,7 +60,7 @@ The REST API is built using `express`. It has 1 endpoint with two methods (POST 
 
 ### Thumbnail Generation
 
-The Thumbnail Generation is built using `sharp`, a Node.js image processing library. 
+The Thumbnail Generation is built using `sharp`, a Node.js image processing library.
 
 ### Job Queue
 
@@ -68,7 +68,7 @@ This is a long-running application, meaning requests should be queued and proces
 
 ## Improvements
 
--   Uploaded photos and generated thumbnails do not persist in the Docker container when it is removed. It should be recommended to have them to be saved in a separate persistent storage.
--   Images (both in storage and thumbnail directories) can be overriden if an image of the same file name and type is uploaded. It should generate unique IDs per image and have a small database to list down image sources and ther unique ID.
--   Improve on writing unit test as I have not mocked properly the redis queue. Also, increase code coverage.
--   Thumbnail generation can still be improved in quality and the area chosed to be resized/cropped into a 100x100 px image.
+- Uploaded photos and generated thumbnails do not persist in the Docker container when it is removed. It should be recommended to have them to be saved in a separate persistent storage.
+- Images (both in storage and thumbnail directories) can be overriden if an image of the same file name and type is uploaded. It should generate unique IDs per image and have a small database to list down image sources and ther unique ID.
+- Improve on writing unit test as I have not mocked properly the redis queue. Also, increase code coverage.
+- Thumbnail generation can still be improved in quality and the area chosed to be resized/cropped into a 100x100 px image.
