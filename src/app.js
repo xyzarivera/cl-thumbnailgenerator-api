@@ -1,7 +1,5 @@
 const express = require("express");
 const fileUpload = require("express-fileupload");
-const bodyParser = require("body-parser");
-const cors = require("cors");
 const morgan = require("morgan");
 const config = require("./config");
 const { get } = require("./api/thumbnails");
@@ -15,9 +13,6 @@ app.use(
   })
 );
 
-app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
 app.post("/thumbnails", async (req, res) => {
